@@ -1,0 +1,23 @@
+{
+    "name": "BotApplication1",
+    "description": "",
+    "secretKey": "",
+    "services": [
+        {
+            "appId": "",
+            "id": "http://localhost:3978/api/messages",
+            "type": "endpoint",
+            "appPassword": "",
+            "endpoint": "http://localhost:3978/api/messages",
+            "name": "BotApplication1"
+        },
+        {
+            "appId": "",
+            "id": "4a4b0fc0-8eb8-11e8-a60c-d97a620103b1",
+            "type": "endpoint",
+            "appPassword": "",
+            "endpoint": "http://05bb10e1.ngrok.io/api/messages",
+            "name": "BotApplication1 - ngrok"
+        }
+    ]
+}

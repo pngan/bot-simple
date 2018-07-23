@@ -1,0 +1,162 @@
+[
+  {
+    "type": "conversationUpdate",
+    "membersAdded": [
+      {
+        "id": "http://localhost:3978/api/messages",
+        "name": "Bot"
+      }
+    ],
+    "channelId": "emulator",
+    "conversation": {
+      "id": "26120f70-8eb6-11e8-bbde-dbb47a1e4334|livechat"
+    },
+    "id": "262633b0-8eb6-11e8-a60c-d97a620103b1",
+    "localTimestamp": "2018-07-24T08:22:41+12:00",
+    "recipient": {
+      "id": "http://localhost:3978/api/messages",
+      "name": "Bot",
+      "role": "bot"
+    },
+    "timestamp": "2018-07-23T20:22:41.002Z",
+    "from": {
+      "id": "default-user",
+      "name": "User"
+    },
+    "serviceUrl": "http://localhost:2966"
+  },
+  {
+    "type": "conversationUpdate",
+    "membersAdded": [
+      {
+        "id": "default-user",
+        "name": "User"
+      }
+    ],
+    "channelId": "emulator",
+    "conversation": {
+      "id": "26120f70-8eb6-11e8-bbde-dbb47a1e4334|livechat"
+    },
+    "id": "2626a8e0-8eb6-11e8-a60c-d97a620103b1",
+    "localTimestamp": "2018-07-24T08:22:41+12:00",
+    "recipient": {
+      "id": "http://localhost:3978/api/messages",
+      "name": "Bot",
+      "role": "bot"
+    },
+    "timestamp": "2018-07-23T20:22:41.005Z",
+    "from": {
+      "id": "default-user",
+      "name": "User"
+    },
+    "serviceUrl": "http://localhost:2966"
+  },
+  {
+    "type": "message",
+    "text": "hello",
+    "from": {
+      "id": "default-user",
+      "name": "User"
+    },
+    "locale": "en-US",
+    "textFormat": "plain",
+    "timestamp": "2018-07-23T20:22:47.463Z",
+    "channelData": {
+      "clientActivityId": "1532377360871.8698929418052106.0"
+    },
+    "entities": [
+      {
+        "type": "ClientCapabilities",
+        "requiresBotState": true,
+        "supportsTts": true,
+        "supportsListening": true
+      }
+    ],
+    "channelId": "emulator",
+    "conversation": {
+      "id": "26120f70-8eb6-11e8-bbde-dbb47a1e4334|livechat"
+    },
+    "id": "29ffeb70-8eb6-11e8-a60c-d97a620103b1",
+    "localTimestamp": "2018-07-24T08:22:47+12:00",
+    "recipient": {
+      "id": "http://localhost:3978/api/messages",
+      "name": "Bot",
+      "role": "bot"
+    },
+    "serviceUrl": "http://localhost:2966"
+  },
+  {
+    "type": "message",
+    "timestamp": "2018-07-23T20:22:47.535Z",
+    "localTimestamp": "2018-07-24T08:22:47+12:00",
+    "serviceUrl": "http://localhost:2966",
+    "channelId": "emulator",
+    "from": {
+      "id": "http://localhost:3978/api/messages",
+      "name": "Bot"
+    },
+    "conversation": {
+      "id": "26120f70-8eb6-11e8-bbde-dbb47a1e4334|livechat"
+    },
+    "recipient": {
+      "id": "default-user",
+      "role": "user"
+    },
+    "locale": "en-US",
+    "text": "You sent hello which was 5 characters",
+    "attachments": [],
+    "entities": [],
+    "replyToId": "29ffeb70-8eb6-11e8-a60c-d97a620103b1",
+    "id": "2a0ae7f1-8eb6-11e8-a60c-d97a620103b1"
+  },
+  {
+    "type": "message",
+    "text": "world!",
+    "from": {
+      "id": "default-user",
+      "name": "User"
+    },
+    "locale": "en-US",
+    "textFormat": "plain",
+    "timestamp": "2018-07-23T20:24:19.876Z",
+    "channelData": {
+      "clientActivityId": "1532377360871.8698929418052106.2"
+    },
+    "channelId": "emulator",
+    "conversation": {
+      "id": "26120f70-8eb6-11e8-bbde-dbb47a1e4334|livechat"
+    },
+    "id": "61150640-8eb6-11e8-a60c-d97a620103b1",
+    "localTimestamp": "2018-07-24T08:24:19+12:00",
+    "recipient": {
+      "id": "http://localhost:3978/api/messages",
+      "name": "Bot",
+      "role": "bot"
+    },
+    "serviceUrl": "http://localhost:2966"
+  },
+  {
+    "type": "message",
+    "timestamp": "2018-07-23T20:24:19.915Z",
+    "localTimestamp": "2018-07-24T08:24:19+12:00",
+    "serviceUrl": "http://localhost:2966",
+    "channelId": "emulator",
+    "from": {
+      "id": "http://localhost:3978/api/messages",
+      "name": "Bot"
+    },
+    "conversation": {
+      "id": "26120f70-8eb6-11e8-bbde-dbb47a1e4334|livechat"
+    },
+    "recipient": {
+      "id": "default-user",
+      "role": "user"
+    },
+    "locale": "en-US",
+    "text": "You sent world! which was 6 characters",
+    "attachments": [],
+    "entities": [],
+    "replyToId": "61150640-8eb6-11e8-a60c-d97a620103b1",
+    "id": "611af9b1-8eb6-11e8-a60c-d97a620103b1"
+  }
+]
