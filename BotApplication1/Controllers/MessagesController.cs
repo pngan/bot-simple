@@ -1,40 +1,43 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using Microsoft.Bot.Builder.FormFlow;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Web.Http.Description;
 
 namespace BotApplication1
 {
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-        ///// <summary>
-        ///// POST: api/Messages
-        ///// Receive a message from a user and reply to it
-        ///// </summary>
-        //public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
-        //{
-        //    if (activity.GetActivityType() == ActivityTypes.Message)
-        //    {
-        //        await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
-        //    }
-        //    else
-        //    {
-        //        HandleSystemMessage(activity);
-        //    }
-        //    var response = Request.CreateResponse(HttpStatusCode.OK);
-        //    return response;
-        //}
+        internal static IDialog<SandyOrder> MakeRootDialog()
+        {
+            return Chain.From(() => FormDialog.FromForm(SandyOrder.BuildForm));
+        }
 
+        [ResponseType(typeof(void))]
         public virtual async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
-            // Check if activity is of type message
-            if (activity != null && activity.GetActivityType() == ActivityTypes.Message)
+            if (activity != null)
             {
-                await Conversation.SendAsync(activity, () => new EchoDialog());
+                switch (activity.GetActivityType())
+                {
+                    case ActivityTypes.Message:
+                        await Conversation.SendAsync(activity, MakeRootDialog);
+                        break;
+
+                    case ActivityTypes.ConversationUpdate:
+                    case ActivityTypes.ContactRelationUpdate:
+                    case ActivityTypes.Typing:
+                    case ActivityTypes.DeleteUserData:
+                    default:
+                        Trace.TraceError($"Unknown activity type ignored: {activity.GetActivityType()}");
+                        break;
+                }
             }
             else
             {
@@ -74,49 +77,42 @@ namespace BotApplication1
         }
     }
 
-    [Serializable]
-    public class EchoDialog : IDialog<object>
+    public enum SandwichOptions
     {
-        protected int count = 1;
+        BLT, BlackForestHam, BuffaloChicken, ChickenAndBaconRanchMelt, ColdCutCombo, MeatballMarinara,
+        OvenRoastedChicken, RoastBeef, RotisserieStyleChicken, SpicyItalian, SteakAndCheese, SweetOnionTeriyaki, Tuna,
+        TurkeyBreast, Veggie
+    };
+    public enum LengthOptions { SixInch, FootLong };
+    public enum BreadOptions { NineGrainWheat, NineGrainHoneyOat, Italian, ItalianHerbsAndCheese, Flatbread };
+    public enum CheeseOptions { American, MontereyCheddar, Pepperjack };
+    public enum ToppingOptions
+    {
+        Avocado, BananaPeppers, Cucumbers, GreenBellPeppers, Jalapenos,
+        Lettuce, Olives, Pickles, RedOnion, Spinach, Tomatoes
+    };
+    public enum SauceOptions
+    {
+        ChipotleSouthwest, HoneyMustard, LightMayonnaise, RegularMayonnaise,
+        Mustard, Oil, Pepper, Ranch, SweetOnion, Vinegar
+    };
 
-        public async Task StartAsync(IDialogContext context)
-        {
-            context.Wait(MessageReceivedAsync);
-        }
+    [Serializable]
+    public class SandyOrder
+    {
+        public SandwichOptions? Sandwich;
+        public LengthOptions? Length;
+        public BreadOptions? Bread;
+        public CheeseOptions? Cheese;
+        public List<ToppingOptions> Toppings;
+        public List<SauceOptions> Sauce;
 
-        public virtual async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
+        public static IForm<SandyOrder> BuildForm()
         {
-            var message = await argument;
-            if (message.Text == "reset")
-            {
-                PromptDialog.Confirm(
-                    context,
-                    AfterResetAsync,
-                    "Are you sure you want to reset the count?",
-                    "Didn't get that!",
-                    promptStyle: PromptStyle.None);
-            }
-            else
-            {
-                await context.PostAsync($"{this.count++}: You said {message.Text}");
-                context.Wait(MessageReceivedAsync);
-            }
+            return new FormBuilder<SandyOrder>()
+                .Message("Welcome to the simple sandwich order bot!")
+                .Build();
         }
-
-        public async Task AfterResetAsync(IDialogContext context, IAwaitable<bool> argument)
-        {
-            var confirm = await argument;
-            if (confirm)
-            {
-                this.count = 1;
-                await context.PostAsync("Reset count.");
-            }
-            else
-            {
-                await context.PostAsync("Did not reset count.");
-            }
-            context.Wait(MessageReceivedAsync);
-        }
-    }
+    };
 
 }
